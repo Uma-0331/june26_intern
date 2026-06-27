@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="stylee.css">
+</head>
+
+<<body>
+
+    <div class="container">
+        <h1>📝 My To-Do List</h1>
+
+        <input type="text" id="task" placeholder="Enter a task">
+
+        <button class="add-btn" onclick="addTask()">Add Task</button>
+
+        <button class="delete-all-btn" onclick="deleteAll()">Delete All</button>
+
+        <hr>
+
+        <ul id="list"></ul>
+    </div>
+
+</body>
+
+    <script>
+
+        function addTask() {
+
+            var taskInput = document.getElementById("task");
+            var taskText = taskInput.value;
+
+            if (taskText === "") {
+                alert("Please enter a task");
+                return;
+            }
+
+            var li = document.createElement("li");
+
+            li.innerHTML =
+                '<span>' + taskText + '</span>' +
+                '<div>' +
+                '<input type="checkbox" onclick="completeTask(this)">' +
+                '<button class="delete-btn" onclick="deleteTask(this)">Delete</button>' +
+                '</div>';
+
+            document.getElementById("list").appendChild(li);
+
+            taskInput.value = "";
+        }
+
+        function deleteTask(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+        function deleteAll() {
+            document.getElementById("list").innerHTML = "";
+        }
+
+        function completeTask(checkbox) {
+
+            if (checkbox.checked) {
+                checkbox.parentElement.parentElement.classList.add("completed");
+            }
+            else {
+                checkbox.parentElement.parentElement.classList.remove("completed");
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
